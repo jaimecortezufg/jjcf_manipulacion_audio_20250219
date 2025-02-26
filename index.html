@@ -125,6 +125,15 @@
 					<button type="button" id="pause" class="btn btn-danger">Pausar</button>
 				</div>
 			</div>
+			<div id="drumSet">
+				<button type="button" id="KeyW" class="btn btn-secondary">Tambor 1</button>
+				<button type="button" id="KeyA" class="btn btn-secondary">Tambor 2</button>
+				<button type="button" id="KeyS" class="btn btn-secondary">Tambor 3</button>
+				<button type="button" id="KeyD" class="btn btn-secondary">Tambor 4</button>
+				<button type="button" id="KeyJ" class="btn btn-secondary">Snare</button>
+				<button type="button" id="KeyK" class="btn btn-secondary">Crash</button>
+				<button type="button" id="KeyL" class="btn btn-secondary">Kick-Bass</button>
+			</div>
 		</main>
 		<script type="text/javascript">
 			window.onload = () => {
@@ -142,6 +151,36 @@
 					audio.pause();
 				}
 			}
+		</script>
+		<script type="text/javascript">
+			const sounds = {
+				'KeyW':'https://www.virtualdrumming.com/drums/virtual-drum-sounds/hip-hop/tom1.ogg',
+				'KeyA':'https://www.virtualdrumming.com/drums/virtual-drum-sounds/hip-hop/tom2.ogg',
+				'KeyS':'https://www.virtualdrumming.com/drums/virtual-drum-sounds/hip-hop/tom3.ogg',
+				'KeyD':'https://www.virtualdrumming.com/drums/virtual-drum-sounds/hip-hop/pad1.ogg',
+				'KeyJ':'https://www.virtualdrumming.com/drums/virtual-drum-sounds/hip-hop/snare1.ogg',
+				'KeyK':'https://www.virtualdrumming.com/drums/virtual-drum-sounds/crash1.ogg',
+				'KeyL':'https://www.virtualdrumming.com/drums/virtual-drum-sounds/hip-hop/kik.ogg'
+			}
+
+			const play = sound => {
+				console.log("reproduciendo",sound);
+				var audio = new Audio(sound);
+				audio.play();
+			}
+
+			document.getElementById('drumSet').addEventListener('click',function(e){
+				const tgt = e.target.closest('button');
+				if(tgt) play(sounds[tgt.id])				
+			});
+
+			window.addEventListener('keypress',function(e){
+				console.log(e.code);
+				if(sounds[e.code]){
+					console.log("presionando",e.code);
+					document.getElementById(e.code).click();
+				}
+			});
 		</script>
 	</body>
 </html>
